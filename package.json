@@ -6,7 +6,8 @@
     "dev": "next",
     "staging": "NODE_ENV=staging next",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "clean": "rimraf node_modules/.cache .next"
   },
   "dependencies": {
     "@zeit/next-less": "^0.1.1",
@@ -44,7 +45,10 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
-    "sw-precache-webpack-plugin": "^0.11.5"
+    "nodemon": "^1.12.1",
+    "rimraf": "^2.6.2",
+    "sw-precache-webpack-plugin": "^0.11.4",
+    "webpack-bundle-analyzer": "^2.9.1"
   },
   "license": "ISC"
 }
