@@ -18,6 +18,15 @@ app.prepare()
     server.use(compression())
   }
 
+  server.get('/list/:id', (req, res) => {
+    const queryParams = { id: req.params.id }
+    if (req.url === '/sw.js') {
+      return app.serveStatic(req, res, path.resolve('./static/sw.js'))
+    } else {
+      return handler(req, res, `/list-detail`, queryParams)
+    }
+  })
+
   server.get('*', (req, res) => {
     if (req.url === '/sw.js') {
       return app.serveStatic(req, res, path.resolve('./static/sw.js'))
