@@ -1,11 +1,12 @@
 const express = require('express')
+const path = require('path')
 const compression = require('compression')
 const next = require('next')
 
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-const handle = app.getRequestHandler()
+const handler = app.getRequestHandler()
 
 app.prepare()
 .then(() => {
@@ -16,7 +17,11 @@ app.prepare()
   }
 
   server.get('*', (req, res) => {
-    return handle(req, res)
+    if (req.url === '/sw.js') {
+      return app.serveStatic(req, res, path.resolve('./static/sw.js'))
+    } else {
+      return handler(req, res)
+    }
   })
 
   server.listen(port, (err) => {
