@@ -1,4 +1,4 @@
 // import withReduxStore from 'store/createStore'
-import ListDetail from '../src/containers/ListDetail'
+import ListDetail from 'containers/ListDetail'
 
 export default ListDetail
