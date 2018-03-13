@@ -1,5 +1,5 @@
 const express = require('express')
-// const compression = require('compression')
+const compression = require('compression')
 const next = require('next')
 
 const port = parseInt(process.env.PORT, 10) || 3000
@@ -12,20 +12,8 @@ app.prepare()
   const server = express()
 
   if (process.env.NODE_ENV === "production") {
-    // app.use(compression())
+    server.use(compression())
   }
-
-  server.get('/a', (req, res) => {
-    return app.render(req, res, '/b', req.query)
-  })
-
-  server.get('/b', (req, res) => {
-    return app.render(req, res, '/a', req.query)
-  })
-
-  server.get('/posts/:id', (req, res) => {
-    return app.render(req, res, '/posts', { id: req.params.id })
-  })
 
   server.get('*', (req, res) => {
     return handle(req, res)
